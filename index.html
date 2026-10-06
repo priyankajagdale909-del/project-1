@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101426">
+  <title>Hello, World! — A little moment of magic</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101426;
+      color: #f6f4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 16% 18%, rgba(101, 83, 235, .27), transparent 38%),
+        radial-gradient(ellipse at 84% 78%, rgba(18, 190, 190, .18), transparent 35%),
+        #101426;
+    }
+    .glow { position: fixed; width: 24rem; aspect-ratio: 1; border-radius: 50%; filter: blur(100px); opacity: .22; pointer-events: none; }
+    .glow.one { background: #7565ff; top: -13rem; right: 8%; }
+    .glow.two { background: #19d1c2; bottom: -17rem; left: 4%; }
+    main {
+      position: relative;
+      width: min(680px, calc(100% - 36px));
+      padding: clamp(2rem, 7vw, 4.5rem);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255,255,255,.095), rgba(255,255,255,.035));
+      box-shadow: 0 32px 100px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.12);
+      backdrop-filter: blur(18px);
+      animation: arrive .8s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .sparkle { display: inline-grid; place-items: center; width: 58px; height: 58px; margin-bottom: 1.7rem; border: 1px solid rgba(255,255,255,.18); border-radius: 19px; background: linear-gradient(135deg, rgba(142,126,255,.35), rgba(35,215,205,.18)); font-size: 1.65rem; box-shadow: 0 10px 35px rgba(117,101,255,.2); }
+    .eyebrow { margin: 0 0 .8rem; color: #b6b4d2; font-size: .75rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(3.2rem, 10vw, 6.3rem); line-height: .98; letter-spacing: -.075em; font-weight: 800; }
+    h1 span { color: transparent; background: linear-gradient(100deg, #b6a9ff 8%, #77e7df 92%); background-clip: text; -webkit-background-clip: text; }
+    .copy { max-width: 420px; margin: 1.5rem auto 2rem; color: #c2c3d5; font-size: 1.05rem; line-height: 1.7; }
+    button { appearance: none; border: 0; border-radius: 999px; padding: .95rem 1.4rem; color: #111426; background: linear-gradient(100deg, #c1b7ff, #83e9df); font: inherit; font-size: .92rem; font-weight: 750; cursor: pointer; box-shadow: 0 9px 28px rgba(106,202,206,.19); transition: transform .2s ease, box-shadow .2s ease; }
+    button:hover { transform: translateY(-2px); box-shadow: 0 13px 35px rgba(106,202,206,.3); }
+    button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+    .note { margin: 2rem 0 0; color: #8589a5; font-size: .78rem; letter-spacing: .04em; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(18px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="glow one" aria-hidden="true"></div>
+  <div class="glow two" aria-hidden="true"></div>
+  <main>
+    <div class="sparkle" aria-hidden="true">✦</div>
+    <p class="eyebrow">A small beginning</p>
+    <h1 id="greeting">Hello,<br><span>World!</span></h1>
+    <p class="copy" id="message">Every great idea starts somewhere. Here’s to the first line of something wonderful.</p>
+    <button id="surprise" type="button">Add a little wonder <span aria-hidden="true"> ↗</span></button>
+    <p class="note">Made with curiosity &amp; a little bit of CSS</p>
+  </main>
+  <script>
+    const button = document.querySelector('#surprise');
+    const message = document.querySelector('#message');
+    const messages = [
+      'Every great idea starts somewhere. Here’s to the first line of something wonderful.',
+      'You showed up. That’s how every adventure begins. ✨',
+      'A blank page is just possibility wearing a disguise. 🌙',
+      'Keep going — the next great thing might start with one more line. 🚀'
+    ];
+    let index = 0;
+    button.addEventListener('click', () => {
+      index = (index + 1) % messages.length;
+      message.textContent = messages[index];
+      button.innerHTML = 'A little more magic <span aria-hidden="true"> ✦</span>';
+    });
+  </script>
+</body>
+</html>
